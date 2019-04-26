@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Dodawanie filmu</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('home')"/>
+
+<div class="container">
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form th:method="POST" th:object="${Course}" th:action="@{/courseForm.html}">
+                <fieldset>
+                    <h1>Dodawanie/Edycja Kierunku studiów</h1>
+
+                    <br>
+
+                    <div class="form-group">
+                        <p>Nazwa kierunku</p>
+                        <input type="text" name="nazwa" th:value="*{nazwa}"
+                               class="form-control" th:classappend="${#fields.hasErrors('nazwa')}?'is-invalid'"
+                               placeholder="Nazwa" required="true" autofocus="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('nazwa')}">
+                            <span th:each="err : ${#fields.errors('nazwa')}" th:text="${err}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Typ studiów</p>
+                        <input type="text" name="typ" th:value="*{typ}"
+                               class="form-control" th:classappend="${#fields.hasErrors('typ')}?'is-invalid'"
+                               placeholder="Nazwa" required="true" autofocus="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('typ')}">
+                            <span th:each="err : ${#fields.errors('typ')}" th:text="${err}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p>Rodzaj studiów</p>
+                        <input type="text" name="rodzaj" th:value="*{rodzaj}"
+                               class="form-control" th:classappend="${#fields.hasErrors('rodzaj')}?'is-invalid'"
+                               placeholder="Rodzaj" required="true" autofocus="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('rodzaj')}">
+                            <span th:each="err : ${#fields.errors('rodzaj')}" th:text="${err}"></span>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+                        <p>Ilość semestrów</p>
+                        <input type="number" name="liczba_semestrow" th:value="*{liczba_semestrow}"
+                               class="form-control" th:classappend="${#fields.hasErrors('liczba_semestrow')}?'is-invalid'"
+                               placeholder="Liczba semestrów" required="true" autofocus="true"/>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('liczba_semestrow')}">
+                            <span th:each="err : ${#fields.errors('liczba_semestrow')}" th:text="${err}"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <p>Opis kierunku</p>
+                        <textarea  name="opis"  th:value="*{opis}"
+                                   class="form-control"  th:classappend="${#fields.hasErrors('opis')}?'is-invalid'"
+                                   placeholder="Opis" required="true" autofocus="true">
+
+                        </textarea>
+
+                        <div class="error text-danger" th:if="${#fields.hasErrors('opis')}">
+                            <span th:each="err : ${#fields.errors('opis')}" th:text="${err}"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Zapisz"/>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <input type="hidden" th:field="*{id}"/>
+                            <input
+                                    type="hidden"
+                                    th:name="${_csrf.parameterName}"
+                                    th:value="${_csrf.token}"/>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

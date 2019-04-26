@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Panel studenta</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('home')"/>
+
+<div id="main" class="container">
+    <h1>Panel studenta</h1>
+    Moje dane: [[${student.imie}]] [[${student.nazwisko}]] (PESEL:[[${student.pesel}]])
+
+    <h3>Edycja danych</h3><hr>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{editStudentForm1.html(id=${student.id})}">Edytuj swoje dane kontaktowe i osobowe</a></div>
+    </div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{editStudentForm2.html(id=${student.id})}">Edytuj swoje dane adresowe</a></div>
+    </div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{userEditionForm.html}">Zmień hasło do konta</a></div>
+    </div>
+
+    <h3>Moje studia</h3><hr>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{/courseList.html}">Przeglądaj kierunki</a></div>
+    </div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{/subjectList.html}">Przeglądaj przedmioty</a></div>
+    </div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{courseTypeSelect.html}">Zapisz się na studia </a></div>
+    </div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{/studentCourseList.html}">Moje zapisy</a></div>
+    </div>
+    <span th:if="${student.semestr==6}">
+        <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{/promoterList.html}">Wybierz promotora</a></div>
+    </div>
+    </span>
+
+</div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>

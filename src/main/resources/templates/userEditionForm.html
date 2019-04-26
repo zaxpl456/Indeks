@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Edycja danych użytkownika</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('registrationForm')"/>
+
+<div class="container" id="main">
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form th:action="@{/userEditionForm.html}" th:method="POST">
+                <fieldset>
+                    <center><h1>Edycja danych użytkownika</h1></center>
+
+                    <div class="form-group">
+                        <label for="pass">Stare hasło:</label>
+                        <input type="password" th:value="${pass}"
+                               class="form-control" placeholder="Stare hasło" name="pass" required="true" autofocus="true"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Nowe hasło:</label>
+                        <input type="password" th:value="${userCommand.password}"
+                               class="form-control" placeholder="Hasło" required="true" name="password" autofocus="true"
+                               th:classappend="${#fields.hasErrors('userCommand.password')}?'is-invalid'"/>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('userCommand.password')}">
+                            <p th:each="err : ${#fields.errors('userCommand.password')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password2">Powtórz hasło:</label>
+                        <input type="password" th:value="${userCommand.passwordConfirm}"
+                               class="form-control" placeholder="Powtórz hasło" name="password2" required="true" autofocus="true"
+                               th:classappend="${#fields.hasErrors('userCommand.passwordConfirm')}?'is-invalid'"/>
+                        <div class="error text-danger" th:if="${#fields.hasErrors('userCommand.passwordConfirm')}">
+                            <p th:each="err : ${#fields.errors('userCommand.passwordConfirm')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <center>
+                        <div class="form-group">
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}"/>
+                            <input type="submit" class="btn btn-primary btn-lg" value="Zapisz dane"/>
+                        </div>
+                    </center>
+                    <br>
+
+
+                </fieldset>
+            </form>
+
+
+
+        </div>
+    </div>
+
+</div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>

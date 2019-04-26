@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Panel pracownika</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('home')"/>
+
+<div id="main" class="container">
+    <h1>Panel pracownika</h1>
+    Moje dane: [[${pracownik.imie}]] [[${pracownik.nazwisko}]] (PESEL:[[${pracownik.pesel}]])
+
+    <hr>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{userEditionForm.html}">Zmień hasło do konta</a></div>
+    </div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{employerSubjectList.html}">Twoje przedmioty</a></div>
+    </div>
+
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{/courseList.html}">Przeglądaj kierunki</a></div>
+    </div>
+    <div class="row" style="margin-bottom: 5px">
+        <div class="col-md-4"><a class="btn btn-primary btn-block" th:href="@{/subjectList.html}">Przeglądaj przedmioty</a></div>
+    </div>
+
+</div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>

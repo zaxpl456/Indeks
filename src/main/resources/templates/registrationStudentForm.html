@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Rejestracja studenta</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('registstrationStudentForm')"/>
+
+<div class="container" id="main">
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form th:method="POST" th:object="${userCommand}">
+                <fieldset>
+                    <center><h1>Rejestracja nowego studenta</h1></center>
+                    <div class="form-group">
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h2>Dane osobowe</h2>
+                    <hr>
+                    <div class="form-group">
+                        <label for="username">Imie:</label>
+                        <input type="text" th:field="*{imie}"
+                               class="form-control" placeholder="Imie" name="username" required="true" autofocus="true"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="surname">Nazwisko:</label>
+                        <input type="text" th:field="*{nazwisko}"
+                               class="form-control" placeholder="Nazwisko" name="surname" required="true" autofocus="true"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pesel">Pesel:</label>
+                        <input type="text" th:field="*{pesel}"
+                               class="form-control" placeholder="Pesel" name="pesel" required="true" autofocus="true"/>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="data_urodzenia">Data urodzenia:</label>
+                        <input type="date" th:field="*{data_urodzenia}"
+                               class="form-control" th:classappend="${#fields.hasErrors('data_urodzenia')}?'is-invalid'"
+                               placeholder="Data urodzenia" required="true" name="data_urodzenia"/>
+                    </div>
+
+                    <hr>
+                    <div class="form-group">
+                        <label for="miejscowosc">Miejscowosc:</label>
+                        <input type="text" th:field="*{adres.miejscowosc}"
+                               class="form-control" placeholder="Miejscowosc" name="miejscowosc" required="true" autofocus="true"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ulica">Ulica:</label>
+                        <input type="text" th:field="*{adres.ulica}"
+                               class="form-control" placeholder="Ulica" name="ulica" required="true" autofocus="true"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numerB">Numer budynku:</label>
+                        <input type="text" th:field="*{adres.numer}"
+                               class="form-control" placeholder="Numer budynku" name="numerB" required="true" autofocus="true"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kraj">Kraj:</label>
+                        <input type="text" th:field="*{adres.kraj}"
+                               class="form-control" placeholder="Kraj" name="kraj" required="true" autofocus="true"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kod_pocztowy">Kod pocztowy:</label>
+                        <input type="text" th:field="*{adres.kod_pocztowy}"
+                               class="form-control" placeholder="Kod pocztowy" name="kod_pocztowy" required="true" autofocus="true"/>
+                    </div>
+                    
+                    <br>
+                    <h2>Dane kontaktowe</h2>
+                    <hr>
+                    <div class="form-group">
+                        <label for="email">Adres Email:</label>
+                        <input type="email" th:field="*{email}"
+                               class="form-control" placeholder="Email" name="email" required="true" autofocus="true"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefon">Numer telefonu:</label>
+                        <input type="text" th:field="*{telefon}"
+                               class="form-control" placeholder="Numer telefonu" name="telefon" required="true" autofocus="true"/>
+                    </div>
+
+                    <center>
+                        <div class="form-group">
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}" />
+                            <input type="submit" class="btn btn-primary btn-lg" value="Zarejestruj"/>
+                        </div>
+                    </center>
+                    <br>
+
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>

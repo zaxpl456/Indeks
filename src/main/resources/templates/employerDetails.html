@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Dodatkowe informacje</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('home')"/>
+
+<div id="main" class="container">
+    <H1>Dane pracownika</H1>
+    <table>
+
+        <td >
+            Imie: <b th:text="${Employer.imie}"></b><br/>
+            Nazwisko: <b th:text="${Employer.nazwisko}"></b><br/>
+            Tytuł: <b th:text="${Employer.tytul}"></b><br/>
+            Stanowisko: <b th:text="${Employer.stanowisko}"></b><br/>
+            Email: <b th:text="${Employer.email}"></b><br/>
+            Prowadzone przedmioty:  <ul class="list-group" th:each="emp : ${Subjects}">
+            <li class="list-group-item"><a  th:align="right"  th:href="@{/subjectList.html(id=${emp.id})}">[[${emp.nazwa}]]</a></li>
+        </ul>
+
+
+
+    </table>
+</div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>

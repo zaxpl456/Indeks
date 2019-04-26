@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Lista kierunków studiów</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('home')"/>
+
+<div class="container">
+        <span th:if="${#lists.isEmpty(promoterListPage)}">
+        <h1>Lista promotorów jest pusta.</h1>
+    </span>
+    <span th:unless="${#lists.isEmpty(promoterListPage)}">
+        <H1>Lista promotorów</H1>
+        <table class="table table-striped">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th>Imie i nazwisko</th>
+                    <th>Liczba miejsc</th>
+                    <th>Kierunek</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="promotor : ${promoterListPage}">
+                    <td> <a  th:align="right"  th:href="@{/employerList.html(id=${promotor.employer.id})}">[[${promotor.employer.imie}]] [[${promotor.employer.nazwisko}]]</a></td>
+                    <td th:text="${promotor.liczba_miejsc}"></td>
+                     <td th:text="${promotor.course.nazwa}"></td>
+                    <td sec:authorize="hasRole('ROLE_STUDENT')" >
+                        <a th:if="${promotor.liczba_miejsc &gt; 0 and check==false}" class="btn btn-danger" th:href="@{promoterStudent.html(id=${promotor.id})}">Zapisz się</a>
+                        <a th:if="${check}==true" class="btn btn-success" th:href="@{promoterStudentDelete.html(did=${promotor.id})}">Wypisz się</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </span>
+</div>
+
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>

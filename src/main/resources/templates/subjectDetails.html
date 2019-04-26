@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Dodatkowe informacje</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('home')"/>
+
+<div id="main" class="container">
+    <H1>Dane przedmiotu</H1>
+    <table>
+
+        <td >
+            Nazwa: <b th:text="${Subject.nazwa}"></b><br/>
+            Kierunek: <b th:text="${Subject.course.nazwa}"></b><br/>
+            Semestr: <b th:text="${Subject.semestr}"></b><br/>
+
+
+            Koordynatorzy:
+            <ul class="list-group" th:each="emp : ${Subject.employers}">
+                <li class="list-group-item"><a th:href="@{/employerList.html(id=${emp.id})}">[[${emp.imie}]] [[${emp.nazwisko}]]</a></li>
+            </ul>
+
+            Prowadzący labolatoria:
+            <ul class="list-group" th:each="emp : ${Subject.employersLab}">
+                <li class="list-group-item"><a th:href="@{/employerList.html(id=${emp.id})}">[[${emp.imie}]] [[${emp.nazwisko}]]</a></li>
+            </ul>
+
+
+            Opis kierunku : <b th:text="${Subject.opis}"></b><br/>
+        </td>
+        </tr>
+        <br/>
+    </table>
+</div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>

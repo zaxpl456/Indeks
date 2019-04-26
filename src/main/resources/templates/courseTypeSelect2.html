@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Wybór typu studiów</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('home')"/>
+
+<div id="main" class="container">
+    <h1>Wybór typu studiów</h1>
+    <h3>Pierwszego stopnia</h3><hr>
+    <div class="row">
+        <div class="col-md-2">
+            <a class="btn btn-primary" th:href="@{/recruitmentForm.html(tid=${tid}, rid=${1} )}">Inżynierskie</a>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-primary" th:href="@{/recruitmentForm.html(tid=${tid}, rid=${3} )}">Licencjackie</a>
+        </div>
+    </div>
+    <h3>Drugiego stopnia</h3><hr>
+    <div class="row">
+        <div class="col-md-2">
+            <a class="btn btn-primary" th:href="@{/recruitmentForm2.html(tid=${tid}, rid=${2} )}">Magisterskie</a>
+        </div>
+    </div>
+</div>
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>

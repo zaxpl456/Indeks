@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:replace="shared/header :: header-css"/>
+    <title>Lista kierunków studiów</title>
+</head>
+<body>
+<div th:replace="shared/header :: header('home')"/>
+
+<div class="container">
+
+    <span th:if="${#lists.isEmpty(courseListPage)}">
+        <h1>Lista kierunków jest pusta.</h1>
+    </span>
+    <span th:unless="${#lists.isEmpty(courseListPage)}">
+
+<H1>Lista kierunków</H1>
+<table class="table table-striped">
+
+    <thead class="thead-dark">
+    <tr>
+        <th>Nazwa kierunku</th>
+        <th>Typ</th>
+        <th>Rodzaj</th>
+
+
+    </tr>
+    </thead>
+
+
+    <tbody>
+    <tr th:each="course : ${courseListPage}">
+
+
+
+        <td> <a  th:align="right"  th:href="@{/courseList.html(id=${course.id})}">[[${course.nazwa}]]</a></td>
+        <td th:text="${course.typ}"></td>
+        <td th:text="${course.rodzaj}"></td>
+
+        <td sec:authorize="hasRole('ROLE_DZIEKANAT')" >
+            <a class="btn btn-danger" th:href="@{courseList.html(did=${course.id})}">Usuń</a>
+            <a class="btn btn-success" th:href="@{courseForm.html(id=${course.id})}">Edytuj</a>
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+        </span>
+    <a sec:authorize="hasRole('ROLE_DZIEKANAT')" class="btn btn-success" href="courseForm.html">Dodaj Nowy</a>
+</div>
+
+
+
+
+
+
+
+
+
+<div th:replace="shared/footer :: footer"></div>
+</body>
+</html>
